@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9F0FEDC4-F939-42C6-801E-B56268F461F3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VimSox.Core</RootNamespace>
+    <AssemblyName>VimSox.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Command\CommandState.cs" />
+    <Compile Include="Command\ClearStackCommand.cs" />
+    <Compile Include="Command\CommandKey.cs" />
+    <Compile Include="CommandProcessor.cs" />
+    <Compile Include="Command\Context.cs" />
+    <Compile Include="Command\EnterInsertModeCommand.cs" />
+    <Compile Include="Command\ExitInsertModeCommand.cs" />
+    <Compile Include="Command\ICommand.cs" />
+    <Compile Include="Command\IContext.cs" />
+    <Compile Include="Command\MoveBottomCommand.cs" />
+    <Compile Include="Command\MoveRightCommand.cs" />
+    <Compile Include="Command\MoveLeftCommand.cs" />
+    <Compile Include="Command\ExecutionResult.cs" />
+    <Compile Include="Hook\ConditionalKeyHook.cs" />
+    <Compile Include="IFocusControl.cs" />
+    <Compile Include="Hook\IHookCondition.cs" />
+    <Compile Include="Hook\IKeyDispatcher.cs" />
+    <Compile Include="Hook\IKeyDispatcherTarget.cs" />
+    <Compile Include="ILogger.cs" />
+    <Compile Include="ISolutionExplorerControl.cs" />
+    <Compile Include="KeyboardHook.cs" />
+    <Compile Include="InputMode.cs" />
+    <Compile Include="Command\MoveDownCommand.cs" />
+    <Compile Include="Command\MoveTopCommand.cs" />
+    <Compile Include="Command\MoveUpCommand.cs" />
+    <Compile Include="Hook\KeyDispatcher.cs" />
+    <Compile Include="Hook\NativeMethods.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Key.snk" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
