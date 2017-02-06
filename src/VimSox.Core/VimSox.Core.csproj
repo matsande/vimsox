@@ -61,13 +61,11 @@
     <Compile Include="Command\MoveLeftCommand.cs" />
     <Compile Include="Command\ExecutionResult.cs" />
     <Compile Include="Hook\ConditionalKeyHook.cs" />
-    <Compile Include="IFocusControl.cs" />
     <Compile Include="Hook\IHookCondition.cs" />
     <Compile Include="Hook\IKeyDispatcher.cs" />
     <Compile Include="Hook\IKeyDispatcherTarget.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="ISolutionExplorerControl.cs" />
-    <Compile Include="KeyboardHook.cs" />
     <Compile Include="InputMode.cs" />
     <Compile Include="Command\MoveDownCommand.cs" />
     <Compile Include="Command\MoveTopCommand.cs" />

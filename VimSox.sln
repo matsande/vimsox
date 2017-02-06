@@ -15,7 +15,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VimSox.Core.Test", "test\Vi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sln", "sln", "{907EFB2D-79E8-459F-A0CD-264C54EB672A}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
 		LICENSE.txt = LICENSE.txt
+		readme.md = readme.md
 	EndProjectSection
 EndProject
 Global
