@@ -2,7 +2,7 @@
 Provides Vim-like navigation to the Visual Studio Solution Explorer.
 
 # Installation 
-Simplest way to install is through the Extension Manager or the Visual Studio gallery URL HERE.
+Simplest way to install is through the Extension Manager or the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=matsande.VimSox).
 Or if building from source, use the resulting VimSox.vsix.
 
 Currently supported Visual Studio versions are 2015+.

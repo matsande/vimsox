@@ -6,7 +6,7 @@
     <Description xml:space="preserve">Provides Vim-like navigation to the Visual Studio Solution Explorer.</Description>
     <MoreInfo>https://github.com/matsande/vimsox</MoreInfo>
     <License>LICENSE.txt</License>
-    <Icon>Resources\VimSoxsmall.ico</Icon>
+    <Icon>Resources\VimSox.png</Icon>
     <Tags>Solution Explorer, vim, navigation</Tags>
   </Metadata>
   <Installation>
