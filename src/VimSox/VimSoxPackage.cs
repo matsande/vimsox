@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
+using System.Threading;
+using System.Threading.Tasks;
 using EnvDTE;
 using EnvDTE80;
+using Microsoft;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using VimSox.Core;
@@ -27,12 +30,12 @@ namespace VimSox
     /// To get loaded into VS, the package must be referred by &lt;Asset Type="Microsoft.VisualStudio.VsPackage" ...&gt; in .vsixmanifest file.
     /// </para>
     /// </remarks>
-    [PackageRegistration(UseManagedResourcesOnly = true)]
+    [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
     [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 1400)] // Info on this package for Help/About
     [Guid(VimSoxPackage.PackageGuidString)]
-    [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
+    [ProvideAutoLoad(UIContextGuids80.SolutionExists, PackageAutoLoadFlags.BackgroundLoad)]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
-    public sealed class VimSoxPackage : Package
+    public sealed class VimSoxPackage : AsyncPackage
     {
         /// <summary>
         /// VimSoxPackage GUID string.
@@ -55,22 +58,35 @@ namespace VimSox
         /// Initialization of the package; this method is called right after the package is sited, so this is the place
         /// where you can put all the initialization code that rely on services provided by VisualStudio.
         /// </summary>
-        protected override void Initialize()
+        protected override async System.Threading.Tasks.Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
-            base.Initialize();
-            var dte = GetService(typeof(DTE)) as DTE2;
-
             var logger = new DebugLogger();
 
-            this.commandProcessor = new CommandProcessor(
-                new SolutionExplorerControl(dte.ToolWindows.SolutionExplorer, logger),
-                logger);
+            try
+            {
+                await base.InitializeAsync(cancellationToken, progress);
 
-            this.keyHook = new ConditionalKeyHook(
-                new SolutionExplorerHookCondition(dte, logger),
-                new KeyDispatcher(this.commandProcessor));
+                var dte = await GetServiceAsync(typeof(DTE)) as DTE2;
 
-            logger.Log("Initialized...");
+                Assumes.Present(dte);
+
+                await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+
+                this.commandProcessor = new CommandProcessor(
+                    new SolutionExplorerControl(dte.ToolWindows.SolutionExplorer, logger),
+                    logger);
+
+                this.keyHook = new ConditionalKeyHook(
+                    new SolutionExplorerHookCondition(dte, logger),
+                    new KeyDispatcher(this.commandProcessor));
+
+                logger.Log("Initialized...");
+            }
+            catch (Exception ex)
+            {
+                logger.Log(ex.Message);
+                throw ex;
+            }
         }
 
         protected override void Dispose(bool disposing)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using EnvDTE;
+using Microsoft.VisualStudio.Shell;
 using VimSox.Core;
 
 namespace VimSox
@@ -18,11 +19,15 @@ namespace VimSox
 
         public void MoveDown()
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
             this.solutionExplorer.SelectDown(vsUISelectionType.vsUISelectionTypeSelect, 1);
         }
 
         public void MoveLeft()
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
             var selectedItem = GetSelectedItem(this.solutionExplorer);
             if (selectedItem != null)
             {
@@ -42,6 +47,8 @@ namespace VimSox
 
         public void MoveRight()
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
             if (this.solutionExplorer.UIHierarchyItems.Count > 0)
             {
                 var selectedItem = GetSelectedItem(this.solutionExplorer);
@@ -54,29 +61,39 @@ namespace VimSox
 
         public void MoveUp()
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
             this.solutionExplorer.SelectUp(vsUISelectionType.vsUISelectionTypeSelect, 1);
         }
 
         public void MoveTop()
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
             var firstItem = this.solutionExplorer.UIHierarchyItems.OfType<UIHierarchyItem>().FirstOrDefault();
             firstItem?.Select(vsUISelectionType.vsUISelectionTypeSelect);
         }
 
         public void MoveBottom()
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
             var lastItem = this.solutionExplorer.UIHierarchyItems.OfType<UIHierarchyItem>().LastOrDefault();
             RecurseMoveBottom(lastItem, this.logger);
         }
 
         private UIHierarchyItem GetSelectedItem(UIHierarchy solutionExplorer)
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
             var selectedItems = solutionExplorer.SelectedItems as UIHierarchyItem[];
             return selectedItems?.FirstOrDefault();
         }
 
         private static void RecurseMoveBottom(UIHierarchyItem item, ILogger logger)
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
             if (item == null)
             {
                 return;

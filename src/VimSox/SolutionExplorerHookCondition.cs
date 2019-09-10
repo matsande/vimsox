@@ -1,5 +1,6 @@
 ﻿using EnvDTE;
 using EnvDTE80;
+using Microsoft.VisualStudio.Shell;
 using VimSox.Core;
 using VimSox.Core.Hook;
 
@@ -13,6 +14,8 @@ namespace VimSox
 
         public SolutionExplorerHookCondition(DTE2 dte, ILogger logger)
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
             this.dte = dte;
             this.logger = logger;
             dte.Events.WindowEvents.WindowActivated += OnWindowActivated;
@@ -20,6 +23,8 @@ namespace VimSox
 
         private void OnWindowActivated(Window GotFocus, Window LostFocus)
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
             this.active = (GotFocus == this.dte.ToolWindows.SolutionExplorer.Parent);
             this.logger.Log($"Window activated = {this.active}");
         }
