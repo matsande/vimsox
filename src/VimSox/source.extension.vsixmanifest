@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="VimSox.matsande.068aed51-8cbb-46c1-99e3-8cb4b96cca5e" Version="0.1.0" Language="en-US" Publisher="Mats Andersson" />
+        <Identity Id="VimSox.matsande.068aed51-8cbb-46c1-99e3-8cb4b96cca5e" Version="0.1.1" Language="en-US" Publisher="Mats Andersson" />
         <DisplayName>VimSox</DisplayName>
         <Description xml:space="preserve">Provides Vim-like navigation to the Visual Studio Solution Explorer.</Description>
         <MoreInfo>https://github.com/matsande/vimsox</MoreInfo>
